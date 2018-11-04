@@ -35,7 +35,7 @@ class Viewer(qw.QMainWindow):
         self.display.setPixmap(self.canvas)
 
     def draw_polygon_cav(self):
-        a = 250
+        a = 200
         b = 500
         c = 60
         d = 120
