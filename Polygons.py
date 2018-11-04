@@ -55,10 +55,12 @@ class Vector:
 
 
 class Polygon:
-    def __init__(self, *argv, **args):
+    # n = size of each individual polygon
+    # *argv = list of arbitrary length (in this case 3-tuples (x,y,z))
+    def __init__(self, n, *argv):
         self.size = 0
-        self.color = args
         points = []
+        # check format, each point consists of (x,y,z)
         for point in argv:
             if len(point) == 3:
                 points.append(point)
@@ -68,23 +70,38 @@ class Polygon:
 
         if len(points) < 3:
             raise TypeError("A Polygon consists of at least 3 points")
-        self.points = points
+
+        # Slice array into smaller arrays of size n (a cube consists of n=6 polygons)
+        poly = []
+        while len(points) > n:
+            sliced = points[:n]
+            poly.append(sliced)
+            points = points[1:]
+
+        # e.g.: polygons = [[(a,b,c),(d,e,f),(g,h,i)],[(),(),()],...]
+        self.polygons = poly
 
     def size(self):
         return self.size
 
 
-cube = [(300,300,60), (300,600,60), (600,600,60), (600,300,60),
-        (300,300,30), (300,300,60), (600,300,60), (600,300,30),
-        (300,300,30), (300,600,30), (300,600,60), (300,300,60),
-        (300,600,30), (300,600,60), (600,600,60), (600,600,30),
-        (600,300,60), (600,600,60), (600,600,30), (600,300,30),
-        (300,300,60), (300,600,30), (600,600,60), (600,300,30)]
+a = 200
+b = 500
+c = 60
+d = 120
+cube = [(a, a, d), (a, b, d), (b, b, d), (b, a, d),
+        (a, a, c), (a, a, d), (b, a, d), (b, a, c),
+        (a, a, c), (a, b, c), (a, b, d), (a, a, d),
+        (a, a, c), (a, b, d), (b, b, d), (b, b, c),
+        (b, a, d), (b, b, d), (b, b, c), (b, a, c),
+        (a, a, d), (a, b, c), (b, b, d), (b, a, c)]
 
-teeest = Polygon(*cube)
+teeest = Polygon(4, *cube)
+print("number of all points: ", teeest.size)
+print("array with n-edged-polygons: ", teeest.polygons)
 
 test = Vector(1, 2, 3, 4, 5, 6)
-print(test.length())
+print("length of test-vector: ", test.length())
 testpoint = Point(8, 9, 10)
 testpoint2 = Point(4, 7, 10)
 test2 = Vector(testpoint.x, testpoint.y, testpoint.z, testpoint2.x, testpoint2.y, testpoint2.z)

@@ -35,44 +35,60 @@ class Viewer(qw.QMainWindow):
         self.display.setPixmap(self.canvas)
 
     def draw_polygon_cav(self):
-        a = 200
-        b = 500
-        c = 60
-        d = 120
-        cube1 = Polygon((a, a, d), (a, b, d), (b, b, d), (b, a, d))
-        cube2 = Polygon((a, a, c), (a, a, d), (b, a, d), (b, a, c))
-        cube3 = Polygon((a, a, c), (a, b, c), (a, b, d), (a, a, d))
-        cube4 = Polygon((a, a, c), (a, b, d), (b, b, d), (b, b, c))
-        cube5 = Polygon((b, a, d), (b, b, d), (b, b, c), (b, a, c))
-        cube6 = Polygon((a, a, d), (a, b, c), (b, b, d), (b, a, c))
-
-        cub_obj = []
-        cub_obj.append([cube1])
-        cub_obj.append([cube2])
-        cub_obj.append([cube3])
-        cub_obj.append([cube4])
-        cub_obj.append([cube5])
-        cub_obj.append([cube6])
 
         self.painter = qg.QPainter(self.canvas)
         self.painter.setPen(qg.QPen(qc.Qt.red, 5, qc.Qt.SolidLine))
         self.painter.setBrush(qg.QBrush(qc.Qt.red, qc.Qt.SolidPattern))
 
-        for poly in cub_obj:
-            x = poly[0] + 0.5 * np.sqrt(2) * poly[2]
-            y = poly[1] + 0.5 * np.sqrt(2) * poly[2]
+        for poly in cube_obj.polygons:
+            x = poly[0][0] + 0.5 * np.sqrt(2) * poly[0][2]
+            y = poly[0][1] + 0.5 * np.sqrt(2) * poly[0][2]
             self.painter.drawPoint(x, y)
 
-        index = 0
-        for point in range(len(cube_obj.points) - 1):
-            x = cube_obj.points[point][0] + 0.5 * np.sqrt(2) * cube_obj.points[point][2]
-            y = cube_obj.points[point][1] + 0.5 * np.sqrt(2) * cube_obj.points[point][2]
-            x2 = cube_obj.points[point + 1][0] + 0.5 * np.sqrt(2) * cube_obj.points[point + 1][2]
-            y2 = cube_obj.points[point + 1][1] + 0.5 * np.sqrt(2) * cube_obj.points[point + 1][2]
-            self.painter.drawLine(x, y, x2, y2)
-            index += 1
+
+# DOES NOT WORK: attempting to draw a line from starting point to the next to the next and so on (start = end)
+        for i in range(5):
+            # 5 because a cube consists of 6 areas (the 6th area has index 5)
+            for j in range(3):
+                # if we have reached the last point in our polygon (in this case the 4th point with index 3)
+                # then connect last point with first point
+                if j == 3:
+                    x1 = cube_obj.polygons[i][j][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    x2 = cube_obj.polygons[i][0][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][0][2]
+                    y1 = cube_obj.polygons[i][j][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    y2 = cube_obj.polygons[i][0][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][0][2]
+                # simply connect all the points in the polygon
+                else:
+                    x1 = cube_obj.polygons[i][j][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    x2 = cube_obj.polygons[i][j+1][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j+1][2]
+                    y1 = cube_obj.polygons[i][j][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    y2 = cube_obj.polygons[i][j+1][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j+1][2]
+                self.painter.drawLine(x1, y1, x2, y2)
 
         self.display.setPixmap(self.canvas)
+
+
+"""     for poly in range(len(cube_obj.polygons) - 1):
+            x1 = (cube_obj.polygons[poly][0][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[poly][0][2])
+            y1 = (cube_obj.polygons[poly][0][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[poly][0][2])
+            x2 = (cube_obj.polygons[poly][1][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[poly][1][2])
+            y2 = (cube_obj.polygons[poly][1][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[poly][1][2])
+            self.painter.drawLine(x1, y1, x2, y2)"""
+
+
+# -------------------------------------------------- Testing --------------------------------------------------------- #
+
+a = 200
+b = 500
+c = 60
+d = 120
+cube = [(a, a, d), (a, b, d), (b, b, d), (b, a, d),
+        (a, a, c), (a, a, d), (b, a, d), (b, a, c),
+        (a, a, c), (a, b, c), (a, b, d), (a, a, d),
+        (a, a, c), (a, b, d), (b, b, d), (b, b, c),
+        (b, a, d), (b, b, d), (b, b, c), (b, a, c),
+        (a, a, d), (a, b, c), (b, b, d), (b, a, c)]
+cube_obj = Polygon(4, *cube)
 
 # Start app
 if __name__ == '__main__':
