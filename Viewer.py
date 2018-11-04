@@ -45,17 +45,17 @@ class Viewer(qw.QMainWindow):
             y = poly[0][1] + 0.5 * np.sqrt(2) * poly[0][2]
             self.painter.drawPoint(x, y)
 
-        # attempting to draw a line from starting point to the following point (start = end)
+        self.display.setPixmap(self.canvas)
+
+
+""" attempting to draw a line from starting point to the following point (start = end)
         for i in cube_obj.polygons:
             for poly in range(len(cube_obj.polygons) - 1):
                 x1 = cube_obj.polygons[i][poly][0]
                 x2 = cube_obj.polygons[i][poly + 1][0]
                 y1 = cube_obj.polygons[i][poly][1]
                 y2 = cube_obj.polygons[i][poly + 1][1]
-                self.painter.drawLine(x1, y1, x2, y2)
-        self.display.setPixmap(self.canvas)
-
-        print(cube_obj.polygons[0][0][0])
+                self.painter.drawLine(x1, y1, x2, y2)"""
 
 
 """     for poly in range(len(cube_obj.polygons) - 1):
@@ -66,9 +66,7 @@ class Viewer(qw.QMainWindow):
             self.painter.drawLine(x1, y1, x2, y2)"""
 
 
-
-
-
+# -------------------------------------------------- Testing --------------------------------------------------------- #
 
 a = 200
 b = 500
