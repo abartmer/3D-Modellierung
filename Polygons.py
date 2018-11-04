@@ -51,7 +51,7 @@ class Vector:
         return self.b.z - self.a.z
 
     def length(self):
-        return (self.i**2 + self.j**2 + self.k**2) ** (1/2)
+        return (self.i ** 2 + self.j ** 2 + self.k ** 2) ** (1 / 2)
 
 
 class Polygon:
@@ -61,21 +61,20 @@ class Polygon:
             if len(point) == 3:
                 points.append(point)
             else:
-                raise TypeError("Element "+str(point)+" needs to have 3 coordinates")
+                raise TypeError("Element " + str(point) + " needs to have 3 coordinates")
 
         if len(points) < 3:
             raise TypeError("A Polygon consists of at least 3 points")
         self.points = points
 
 
-cube = [(0,0,1), (0,1,1), (1,1,1), (1,0,1),  # Seite 1
-        (0,0,0), (0,0,1), (1,0,1), (1,0,0),  # Seite 2
-        (0,0,0), (0,1,0), (0,1,1), (0,0,1),  # Seite 3
-        (0,1,0), (0,1,1), (1,1,1), (1,1,0),  # Seite 4
-        (1,0,1), (1,1,1), (1,1,0), (1,0,0),  # Seite 5
-        (0,0,0), (0,1,0), (1,1,0), (1,0,0)]  # Seite 6
+cube = [(0, 0, 1), (0, 1, 1), (1, 1, 1), (1, 0, 1),
+        (0, 0, 0), (0, 0, 1), (1, 0, 1), (1, 0, 0),
+        (0, 0, 0), (0, 1, 0), (0, 1, 1), (0, 0, 1),
+        (0, 1, 0), (0, 1, 1), (1, 1, 1), (1, 1, 0),
+        (1, 0, 1), (1, 1, 1), (1, 1, 0), (1, 0, 0),
+        (0, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 0)]
 teeest = Polygon(*cube)
-
 
 test = Vector(1, 2, 3, 4, 5, 6)
 print(test.length())
