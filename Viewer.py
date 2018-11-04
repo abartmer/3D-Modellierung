@@ -2,6 +2,8 @@ import sys
 from PyQt5 import QtWidgets as qw
 from PyQt5 import QtGui as qg
 from PyQt5 import QtCore as qc
+from Polygons import Polygon
+import numpy as np
 
 
 class Viewer(qw.QMainWindow):
@@ -10,6 +12,8 @@ class Viewer(qw.QMainWindow):
 
         self.init_window()
         self.init_canvas()
+
+        self.draw_polygon_cav()
 
         self.show()
 
@@ -29,6 +33,22 @@ class Viewer(qw.QMainWindow):
         self.painter.end()
 
         self.display.setPixmap(self.canvas)
+
+    def draw_polygon_cav(self):
+        cube = [(0, 0, 1), (0, 1, 1), (1, 1, 1), (1, 0, 1),
+                (0, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 0)]
+        cube_obj = Polygon(*cube)
+
+        self.painter = qg.QPainter(self.canvas)
+        self.painter.setPen(qg.QPen(qc.Qt.red, 5, qc.Qt.SolidLine))
+        self.painter.setBrush(qg.QBrush(qc.Qt.red, qc.Qt.SolidPattern))
+
+        for point in cube_obj.points:
+            self.painter.drawPoint(point[0] + 0.5 * np.sqrt(2 * point[2]), point[1] + 0.5 * np.sqrt(2 * point[2]))
+
+        self.display.setPixmap(self.canvas)
+
+
 
 
 # Start app

@@ -57,11 +57,9 @@ class Vector:
 class Polygon:
     def __init__(self, *argv):
         points = []
-        self.size = 0
         for point in argv:
             if len(point) == 3:
                 points.append(point)
-                self.size += 1
             else:
                 raise TypeError("Element " + str(point) + " needs to have 3 coordinates")
 
@@ -69,15 +67,12 @@ class Polygon:
             raise TypeError("A Polygon consists of at least 3 points")
         self.points = points
 
-    def size(self):
-        return self.size
-
 
 cube = [(0, 0, 1), (0, 1, 1), (1, 1, 1), (1, 0, 1),
         (0, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 0)]
 
 teeest = Polygon(*cube)
-print(teeest.size)
+
 test = Vector(1, 2, 3, 4, 5, 6)
 print(test.length())
 testpoint = Point(8, 9, 10)
