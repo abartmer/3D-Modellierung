@@ -35,15 +35,17 @@ class Viewer(qw.QMainWindow):
         self.display.setPixmap(self.canvas)
 
     def draw_polygon_cav(self):
-        cube = [(300,300,120), (300,600,120), (600,600,120), (600,300,120),
-                (300,300,60), (300,300,120), (600,300,120), (600,300,60),
-                (300,300,60), (300,600,60), (300,600,120), (300,300,120),
-                (300,600,60), (300,600,120), (600,600,120), (600,600,60),
-                (600,300,120), (600,600,120), (600,600,60), (600,300,60),
-                (300,300,120), (300,600,60), (600,600,120), (600,300,60)]
+        a = 250
+        b = 500
+        c = 60
+        d = 120
+        cube = [(a, a, d), (a, b, d), (b, b, d), (b, a, d),
+                (a, a, c), (a, a, d), (b, a, d), (b, a, c),
+                (a, a, c), (a, b, c), (a, b, d), (a, a, d),
+                (a, a, c), (a, b, d), (b, b, d), (b, b, c),
+                (b, a, d), (b, b, d), (b, b, c), (b, a, c),
+                (a, a, d), (a, b, c), (b, b, d), (b, a, c)]
         cube_obj = Polygon(*cube)
-
-
 
         self.painter = qg.QPainter(self.canvas)
         self.painter.setPen(qg.QPen(qc.Qt.red, 5, qc.Qt.SolidLine))
