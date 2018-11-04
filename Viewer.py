@@ -65,7 +65,7 @@ class Viewer(qw.QMainWindow):
                     y2 = cube_obj.polygons[i][j+1][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j+1][2]
                 self.painter.drawLine(x1, y1, x2, y2)
 
-            self.display.setPixmap(self.canvas)
+        self.display.setPixmap(self.canvas)
 
 
 """     for poly in range(len(cube_obj.polygons) - 1):
