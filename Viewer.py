@@ -35,8 +35,8 @@ class Viewer(qw.QMainWindow):
         self.display.setPixmap(self.canvas)
 
     def draw_polygon_cav(self):
-        cube = [(0, 0, 1), (0, 1, 1), (1, 1, 1), (1, 0, 1),
-                (0, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 0)]
+        cube = [(200, 200, 800), (200, 400, 800), (400, 400, 800), (400, 200, 800),
+                (200, 200, 200), (200, 400, 200), (400, 400, 200), (400, 200, 200)]
         cube_obj = Polygon(*cube)
 
         self.painter = qg.QPainter(self.canvas)
