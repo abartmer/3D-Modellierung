@@ -67,7 +67,7 @@ class Polygon:
             raise TypeError("A Polygon consists of at least 3 points")
         self.points = points
 
-
+"""
 cube = [(0, 0, 1), (0, 1, 1), (1, 1, 1), (1, 0, 1),
         (0, 0, 0), (0, 1, 0), (1, 1, 0), (1, 0, 0)]
 
@@ -78,3 +78,4 @@ print(test.length())
 testpoint = Point(8, 9, 10)
 testpoint2 = Point(4, 7, 10)
 test2 = Vector(testpoint.x, testpoint.y, testpoint.z, testpoint2.x, testpoint2.y, testpoint2.z)
+"""
