@@ -48,14 +48,24 @@ class Viewer(qw.QMainWindow):
         self.display.setPixmap(self.canvas)
 
 
-""" attempting to draw a line from starting point to the following point (start = end)
-        for i in cube_obj.polygons:
-            for poly in range(len(cube_obj.polygons) - 1):
-                x1 = cube_obj.polygons[i][poly][0]
-                x2 = cube_obj.polygons[i][poly + 1][0]
-                y1 = cube_obj.polygons[i][poly][1]
-                y2 = cube_obj.polygons[i][poly + 1][1]
-                self.painter.drawLine(x1, y1, x2, y2)"""
+# DOES NOT WORK: attempting to draw a line from starting point to the next to the next and so on (start = end)
+        for i in range(5):
+            # 5 because a cube consists of 6 areas (the 6th area has index 5)
+            for j in range(3):
+                # if we have reached the last point in our polygon (in this case the 4th point with index 3)
+                # then connect last point with first point
+                if j == 3:
+                    x1 = cube_obj.polygons[i][j][0]
+                    x2 = cube_obj.polygons[i][0][0]
+                    y1 = cube_obj.polygons[i][j][1]
+                    y2 = cube_obj.polygons[i][0][1]
+                # simply connect all the points in the polygon
+                else:
+                    x1 = cube_obj.polygons[i][j][0]
+                    x2 = cube_obj.polygons[i][j+1][0]
+                    y1 = cube_obj.polygons[i][j][1]
+                    y2 = cube_obj.polygons[i][j+1][1]
+                self.painter.drawLine(x1, y1, x2, y2)
 
 
 """     for poly in range(len(cube_obj.polygons) - 1):

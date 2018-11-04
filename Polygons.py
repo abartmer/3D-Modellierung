@@ -97,11 +97,11 @@ cube = [(a, a, d), (a, b, d), (b, b, d), (b, a, d),
         (a, a, d), (a, b, c), (b, b, d), (b, a, c)]
 
 teeest = Polygon(4, *cube)
-print(teeest.size)
-print(teeest.polygons)
+print("number of all points: ", teeest.size)
+print("array with n-edged-polygons: ", teeest.polygons)
 
 test = Vector(1, 2, 3, 4, 5, 6)
-print(test.length())
+print("length of test-vector: ", test.length())
 testpoint = Point(8, 9, 10)
 testpoint2 = Point(4, 7, 10)
 test2 = Vector(testpoint.x, testpoint.y, testpoint.z, testpoint2.x, testpoint2.y, testpoint2.z)
