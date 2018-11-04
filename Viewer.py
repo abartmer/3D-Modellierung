@@ -52,7 +52,16 @@ class Viewer(qw.QMainWindow):
         self.painter.setBrush(qg.QBrush(qc.Qt.red, qc.Qt.SolidPattern))
 
         for point in cube_obj.points:
-            self.painter.drawPoint(point[0] + 0.5 * np.sqrt(2) * point[2], point[1] + 0.5 * np.sqrt(2) * point[2])
+            x = point[0] + 0.5 * np.sqrt(2) * point[2]
+            y = point[1] + 0.5 * np.sqrt(2) * point[2]
+            self.painter.drawPoint(x, y)
+
+        for point in range(len(cube_obj.points) - 1):
+            x = cube_obj.points[point][0] + 0.5 * np.sqrt(2) * cube_obj.points[point][2]
+            y = cube_obj.points[point][1] + 0.5 * np.sqrt(2) * cube_obj.points[point][2]
+            x2 = cube_obj.points[point + 1][0] + 0.5 * np.sqrt(2) * cube_obj.points[point + 1][2]
+            y2 = cube_obj.points[point + 1][1] + 0.5 * np.sqrt(2) * cube_obj.points[point + 1][2]
+            self.painter.drawLine(x, y, x2, y2)
 
         self.display.setPixmap(self.canvas)
 
