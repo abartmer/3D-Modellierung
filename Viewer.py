@@ -45,8 +45,6 @@ class Viewer(qw.QMainWindow):
             y = poly[0][1] + 0.5 * np.sqrt(2) * poly[0][2]
             self.painter.drawPoint(x, y)
 
-        self.display.setPixmap(self.canvas)
-
 
 # DOES NOT WORK: attempting to draw a line from starting point to the next to the next and so on (start = end)
         for i in range(5):
@@ -55,17 +53,19 @@ class Viewer(qw.QMainWindow):
                 # if we have reached the last point in our polygon (in this case the 4th point with index 3)
                 # then connect last point with first point
                 if j == 3:
-                    x1 = cube_obj.polygons[i][j][0]
-                    x2 = cube_obj.polygons[i][0][0]
-                    y1 = cube_obj.polygons[i][j][1]
-                    y2 = cube_obj.polygons[i][0][1]
+                    x1 = cube_obj.polygons[i][j][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    x2 = cube_obj.polygons[i][0][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][0][2]
+                    y1 = cube_obj.polygons[i][j][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    y2 = cube_obj.polygons[i][0][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][0][2]
                 # simply connect all the points in the polygon
                 else:
-                    x1 = cube_obj.polygons[i][j][0]
-                    x2 = cube_obj.polygons[i][j+1][0]
-                    y1 = cube_obj.polygons[i][j][1]
-                    y2 = cube_obj.polygons[i][j+1][1]
+                    x1 = cube_obj.polygons[i][j][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    x2 = cube_obj.polygons[i][j+1][0] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j+1][2]
+                    y1 = cube_obj.polygons[i][j][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j][2]
+                    y2 = cube_obj.polygons[i][j+1][1] + 0.5 * np.sqrt(2) * cube_obj.polygons[i][j+1][2]
                 self.painter.drawLine(x1, y1, x2, y2)
+
+            self.display.setPixmap(self.canvas)
 
 
 """     for poly in range(len(cube_obj.polygons) - 1):
