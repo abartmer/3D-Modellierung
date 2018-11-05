@@ -73,13 +73,16 @@ class Polygon:
 
         # Slice array into smaller arrays of size n (a cube consists of n=6 polygons)
         poly = []
-        while len(points) > n:
+        while len(points) >= n:
             sliced = points[:n]
             poly.append(sliced)
-            points = points[1:]
+            points = points[n:]
 
         # e.g.: polygons = [[(a,b,c),(d,e,f),(g,h,i)],[(),(),()],...]
         self.polygons = poly
+
+
+
 
     def size(self):
         return self.size

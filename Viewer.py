@@ -47,9 +47,9 @@ class Viewer(qw.QMainWindow):
 
 
 # DOES NOT WORK: attempting to draw a line from starting point to the next to the next and so on (start = end)
-        for i in range(5):
+        for i in range(len(cube_obj.polygons)):
             # 5 because a cube consists of 6 areas (the 6th area has index 5)
-            for j in range(3):
+            for j in range(len(cube_obj.polygons[0])):
                 # if we have reached the last point in our polygon (in this case the 4th point with index 3)
                 # then connect last point with first point
                 if j == 3:
@@ -85,9 +85,9 @@ d = 120
 cube = [(a, a, d), (a, b, d), (b, b, d), (b, a, d),
         (a, a, c), (a, a, d), (b, a, d), (b, a, c),
         (a, a, c), (a, b, c), (a, b, d), (a, a, d),
-        (a, a, c), (a, b, d), (b, b, d), (b, b, c),
-        (b, a, d), (b, b, d), (b, b, c), (b, a, c),
-        (a, a, d), (a, b, c), (b, b, d), (b, a, c)]
+        (a, b, d), (b, b, d), (b, b, c), (a, b, c),
+        (b, b, d), (b, b, c), (b, a, c), (b, a, d),
+        (a, a, c), (a, b, c), (b, b, c), (b, a, c)]
 cube_obj = Polygon(4, *cube)
 
 # Start app
